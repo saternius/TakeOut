@@ -117,10 +117,12 @@ public class Menu {
 		if(pullUp && F.hitTest(back, event.getX(), event.getY())){
 			pullUp = false;
 			Landing.showInput();
+			Landing.hideEditInputs();
 		}
 	}
 	public static void changeToSettings() {
 		pullUp = true;
+		Landing.showEditInputs();
 		Landing.hideInput();
 	}
 	public static void fall() {
@@ -140,6 +142,7 @@ public class Menu {
 		Clock.clock = 1;
 		Clock.begin = false;
 		Landing.showInput();
+		Landing.hideEditInputs();
 		xVel=-100;
 		//topMenu.x=0;
 		//bottomMenu.x=0;

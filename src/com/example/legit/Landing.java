@@ -38,6 +38,10 @@ public class Landing extends Activity {
 	
 	public GameView gv;
 	static EditText textbox;
+	static EditText ageBox;
+	static EditText heightBox;
+	static EditText weightBox;
+	
 	static String feed;
 	static int totalFat;
 	static int satFat;
@@ -70,15 +74,25 @@ public class Landing extends Activity {
 		textbox = (EditText) findViewById(R.id.editText1);
 		Typeface NEOU = Typeface.createFromAsset(GameView.ctx.getAssets(), "fonts/revy.ttf"); 
 		textbox.setTypeface(NEOU);
-		hideInput();
-		editInputs();
+		ageBox = (EditText) findViewById(R.id.ageText);
+		heightBox = (EditText) findViewById(R.id.heightText);
+		weightBox = (EditText) findViewById(R.id.weightText);
+		//hideInput();
+		hideEditInputs();
 	}
 
 	
-	public static void editInputs() {
-		//nothing for now
+	public static void showEditInputs() {
+		ageBox.setVisibility(View.VISIBLE);
+		heightBox.setVisibility(View.VISIBLE);
+		weightBox.setVisibility(View.VISIBLE);
 	}
-
+	
+	public static void hideEditInputs() {
+		ageBox.setVisibility(View.INVISIBLE);
+		heightBox.setVisibility(View.INVISIBLE);
+		weightBox.setVisibility(View.INVISIBLE);
+	}
 
 	@Override
 	protected void onResume() {
