@@ -24,7 +24,12 @@ public class Menu {
 	static int y=0;
 	static boolean falling = false;
 	static int clock = 0;
+	static boolean sex = false;
 	Paint dang = new Paint();
+	Rect gender = new Rect();
+	Rect lift = new Rect();
+	String[] ex= {"Couch Potatoe","Once A Week","3x a Week","5x a Week", "Athlete"};
+	int exT = 0;
 	public Menu(){
 		backPaint.setColor(Color.rgb(19, 83, 82));
 		inputRect.setColor(Color.rgb(150, 180, 190));
@@ -40,6 +45,23 @@ public class Menu {
 		stage.drawRect(back, backPaint);
 		stage.drawText("Back To Menu",x+F.w(100),y+F.h(230),backText);
 		
+//		AGE
+		Rect inp = new Rect(x+0,y+F.h(30),x+GameView.stage_width,y+F.h(50));
+		stage.drawRect(inp, inputRect);
+//		GENDER
+		gender = new Rect(x+0,y+F.h(70),x+GameView.stage_width,y+F.h(90));
+		stage.drawRect(gender, inputRect);
+//		HEIGHT
+		inp = new Rect(x+0,y+F.h(110),x+GameView.stage_width,y+F.h(130));
+		stage.drawRect(inp, inputRect);
+//		WEIGHT
+		inp = new Rect(x+0,y+F.h(150),x+GameView.stage_width,y+F.h(170));
+		stage.drawRect(inp, inputRect);
+//		Exercise
+		lift = new Rect(x,y+F.h(190),x+GameView.stage_width,y+F.h(210));
+		stage.drawRect(lift, inputRect);
+		
+		
 		Rect bounds = new Rect();
 		String text = "Age";
 		int centX = GameView.stage_width/2;
@@ -50,6 +72,16 @@ public class Menu {
 		descText.getTextBounds(text,0,text.length(),bounds);
 		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(64),descText);
 
+		
+		if(!sex){
+			text = "Male";
+		}else{
+			text = "Female";
+		}
+		descText.getTextBounds(text,0,text.length(),bounds);
+		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(84),descText);
+		
+		
 		if(pullUp){
 		text = "Height-Inches";
 		descText.getTextBounds(text,0,text.length(),bounds);
@@ -60,25 +92,17 @@ public class Menu {
 		descText.getTextBounds(text,0,text.length(),bounds);
 		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(144),descText);
 		
+		
 		text = "Exercise";
 		descText.getTextBounds(text,0,text.length(),bounds);
 		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(184),descText);
 		
-//		
-		Rect inp = new Rect(x+0,y+F.h(30),x+GameView.stage_width,y+F.h(50));
-		stage.drawRect(inp, inputRect);
-//		
-		inp = new Rect(x+0,y+F.h(70),x+GameView.stage_width,y+F.h(90));
-		stage.drawRect(inp, inputRect);
-//		
-		inp = new Rect(x+0,y+F.h(110),x+GameView.stage_width,y+F.h(130));
-		stage.drawRect(inp, inputRect);
-//		
-		inp = new Rect(x+0,y+F.h(150),x+GameView.stage_width,y+F.h(170));
-		stage.drawRect(inp, inputRect);
-//		
-		inp = new Rect(x,y+F.h(190),x+GameView.stage_width,y+F.h(210));
-		stage.drawRect(inp, inputRect);
+		text = ex[exT];
+		descText.getTextBounds(text,0,text.length(),bounds);
+		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(203),descText);
+		
+		
+
 //		
 //		//fake data
 //		stage.drawText("20",x+468,y+425,fakeRect);
@@ -94,8 +118,8 @@ public class Menu {
 			topMenu.y += (Math.abs(topMenu.y) - F.h(200))/12;
 			bottomMenu.y -= (Math.abs(bottomMenu.y) - F.h(400))/12;
 		}else{
-			topMenu.y += (Math.abs(topMenu.y) - 0)/12;
-			bottomMenu.y -= (Math.abs(bottomMenu.y) - F.h(105))/12;
+			topMenu.y += (Math.abs(topMenu.y) - F.h(-4))/12;
+			bottomMenu.y -= (Math.abs(bottomMenu.y) - F.h(101))/12;
 			
 		}
 		
@@ -114,10 +138,22 @@ public class Menu {
 	public void onTouchEvent(MotionEvent event) {
 		bottomMenu.onTouchEvent(event);
 		topMenu.onTouchEvent(event);
-		if(pullUp && F.hitTest(back, event.getX(), event.getY())){
-			pullUp = false;
-			Landing.showInput();
-			Landing.hideEditInputs();
+		if(pullUp){
+			if(F.hitTest(back, event.getX(), event.getY())){
+				pullUp = false;
+				Landing.showInput();
+				Landing.hideEditInputs();
+			}
+			if(F.hitTest(gender, event.getX(), event.getY()) && event.getAction() == MotionEvent.ACTION_DOWN){
+				sex = !sex;
+			}
+			if(F.hitTest(lift,event.getX(), event.getY()) && event.getAction() == MotionEvent.ACTION_DOWN){
+				exT++;
+				if(exT>4){
+					exT = 0;
+				}
+			}
+		
 		}
 	}
 	public static void changeToSettings() {
