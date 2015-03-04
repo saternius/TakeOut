@@ -36,32 +36,49 @@ public class Menu {
 	}
 	public void draw(Canvas stage){
 		stage.drawRect(new Rect(x,y,x+GameView.stage_width,y+GameView.stage_height),dang);
-//		back = new Rect(x+0,y+1690,x+GameView.stage_width,y+2000);
-//		stage.drawRect(back, backPaint);
-//		stage.drawText("Back To Menu",x+200,y+1800,backText);
+		back = new Rect(x+0,y+F.h(215),x+GameView.stage_width,y+F.h(250));
+		stage.drawRect(back, backPaint);
+		stage.drawText("Back To Menu",x+F.w(100),y+F.h(230),backText);
+		
+		Rect bounds = new Rect();
+		String text = "Age";
+		int centX = GameView.stage_width/2;
+		descText.getTextBounds(text,0,text.length(),bounds);
+		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(22),descText);
+		
+		text = "Gender";
+		descText.getTextBounds(text,0,text.length(),bounds);
+		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(64),descText);
+
+		if(pullUp){
+		text = "Height-Inches";
+		descText.getTextBounds(text,0,text.length(),bounds);
+		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(104),descText);
+		}
+		
+		text = "Weight-llbs";
+		descText.getTextBounds(text,0,text.length(),bounds);
+		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(144),descText);
+		
+		text = "Exercise";
+		descText.getTextBounds(text,0,text.length(),bounds);
+		stage.drawText(text,x+centX-bounds.width()/2,y+F.h(184),descText);
+		
 //		
-//		stage.drawText("Age",x+437,y+300,descText);
-//		stage.drawText("Gender",x+362,y+600,descText);
-//		if(pullUp){
-//		stage.drawText("Height",x+367,y+900,descText);
-//		}
-//		stage.drawText("Weight",x+356,y+1200,descText);
-//		stage.drawText("Exercise",x+338,y+1500,descText);
+		Rect inp = new Rect(x+0,y+F.h(30),x+GameView.stage_width,y+F.h(50));
+		stage.drawRect(inp, inputRect);
 //		
-//		Rect inp = new Rect(x+0,y+350,x+GameView.stage_width,y+460);
-//		stage.drawRect(inp, inputRect);
+		inp = new Rect(x+0,y+F.h(70),x+GameView.stage_width,y+F.h(90));
+		stage.drawRect(inp, inputRect);
 //		
-//		inp = new Rect(x+0,y+650,x+GameView.stage_width,y+760);
-//		stage.drawRect(inp, inputRect);
+		inp = new Rect(x+0,y+F.h(110),x+GameView.stage_width,y+F.h(130));
+		stage.drawRect(inp, inputRect);
 //		
-//		inp = new Rect(x+0,y+950,x+GameView.stage_width,y+1060);
-//		stage.drawRect(inp, inputRect);
+		inp = new Rect(x+0,y+F.h(150),x+GameView.stage_width,y+F.h(170));
+		stage.drawRect(inp, inputRect);
 //		
-//		inp = new Rect(x+0,y+1250,x+GameView.stage_width,y+1360);
-//		stage.drawRect(inp, inputRect);
-//		
-//		inp = new Rect(x,y+1550,x+GameView.stage_width,y+1660);
-//		stage.drawRect(inp, inputRect);
+		inp = new Rect(x,y+F.h(190),x+GameView.stage_width,y+F.h(210));
+		stage.drawRect(inp, inputRect);
 //		
 //		//fake data
 //		stage.drawText("20",x+468,y+425,fakeRect);
@@ -74,22 +91,22 @@ public class Menu {
 		topMenu.draw(stage);
 		bottomMenu.draw(stage);
 		if(pullUp){
-			//topMenu.y += (Math.abs(topMenu.y) - 805)/12;
-			//bottomMenu.y -= (Math.abs(bottomMenu.y) - 1900)/12;
+			topMenu.y += (Math.abs(topMenu.y) - F.h(200))/12;
+			bottomMenu.y -= (Math.abs(bottomMenu.y) - F.h(400))/12;
 		}else{
-			//topMenu.y += (Math.abs(topMenu.y) - 0)/12;
-			//bottomMenu.y -= (Math.abs(bottomMenu.y) - 930)/12;
+			topMenu.y += (Math.abs(topMenu.y) - 0)/12;
+			bottomMenu.y -= (Math.abs(bottomMenu.y) - F.h(105))/12;
 			
 		}
 		
 		if(falling){
 			xVel*=.94;
 			x+=xVel;
-			//topMenu.x+=xVel;
-			//bottomMenu.x+=xVel;
+			topMenu.x+=xVel;
+			bottomMenu.x+=xVel;
 		}else{
-			//topMenu.x += (Math.abs(topMenu.x) - 0)/9;
-			//bottomMenu.x += (Math.abs(bottomMenu.x) - 0)/9;
+			topMenu.x += (Math.abs(topMenu.x) - 0)/9;
+			bottomMenu.x += (Math.abs(bottomMenu.x) - 0)/9;
 			x += (Math.abs(x))/12;
 		}
 		

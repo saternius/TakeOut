@@ -70,9 +70,16 @@ public class Landing extends Activity {
 		textbox = (EditText) findViewById(R.id.editText1);
 		Typeface NEOU = Typeface.createFromAsset(GameView.ctx.getAssets(), "fonts/revy.ttf"); 
 		textbox.setTypeface(NEOU);
+		hideInput();
+		editInputs();
 	}
 
 	
+	public static void editInputs() {
+		//nothing for now
+	}
+
+
 	@Override
 	protected void onResume() {
 		super.onResume();

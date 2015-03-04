@@ -1,4 +1,4 @@
-//EARLY
+
 package com.example.legit;
 
 
@@ -73,7 +73,7 @@ public class BottomMenu {
 		
 		text = "GO";
 		go.getTextBounds(text,0,text.length(),bounds);
-		stage.drawText(text, x+GameView.stage_width/2-(bounds.width()/2), y+F.h(210), go);
+		stage.drawText(text, x+GameView.stage_width/2-(bounds.width()/2), y+F.h(120), go);
 		
 		
 	}
